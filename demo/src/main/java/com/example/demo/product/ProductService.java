@@ -8,8 +8,12 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    void productSave(Product product ){
-        productRepository.save(product);
+    void productSave(Product product) {
+        try {
+            productRepository.save(product);
+        } catch (RuntimeException exception) {
+            throw new RuntimeException("Product cannot saved");
+        }
     }
 
 }

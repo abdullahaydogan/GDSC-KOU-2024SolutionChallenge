@@ -8,10 +8,9 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    void categorySave(Category category ){
+    void categorySave(Category category) {
         categoryRepository.save(category);
     }
-
 
 
 }

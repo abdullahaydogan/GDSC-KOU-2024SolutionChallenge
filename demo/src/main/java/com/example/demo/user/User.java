@@ -29,7 +29,7 @@ public class User {
     @Size(min = 4)
     String password;
 
-    boolean active=false;
+    boolean active = false;
 
     String activationToken;
 

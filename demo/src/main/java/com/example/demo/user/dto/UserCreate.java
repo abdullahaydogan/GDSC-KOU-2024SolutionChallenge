@@ -19,14 +19,13 @@ public record UserCreate(
         String password
 ) {
 
-    public  User toUser(){
-        User user=new User();
+    public User toUser() {
+        User user = new User();
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(password);
-        return  user;
+        return user;
     }
-
 
 
 }

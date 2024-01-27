@@ -26,7 +26,6 @@ public class ErrorHandler {
         }
         apiError.setValidationErrors(validationError);
         return ResponseEntity.badRequest().body(apiError);
-
     }
 
     @ExceptionHandler(NotUniqueEmailException.class)

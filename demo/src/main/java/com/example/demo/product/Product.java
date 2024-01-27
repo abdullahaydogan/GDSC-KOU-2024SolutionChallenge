@@ -1,5 +1,6 @@
 package com.example.demo.product;
 
+import com.example.demo.category.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -14,9 +15,8 @@ public class Product {
     @NotBlank
     String name;
     boolean active;
-
-
-
+    @ManyToOne
+    Category category;
 
 
 }

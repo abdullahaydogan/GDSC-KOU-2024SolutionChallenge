@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
-    @PostMapping("/api/v1/category" )
-    void categorySave(@RequestBody Category category){
+
+    @PostMapping("/api/v1/category")
+    void categorySave(@RequestBody Category category) {
         categoryService.categorySave(category);
     }
-
 
 
 }

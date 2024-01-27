@@ -14,13 +14,10 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping("/api/v1/product")
-    GenericMessage productSave(@RequestBody ProductCreate product){
+    GenericMessage productSave(@RequestBody ProductCreate product) {
         productService.productSave(product.toProduct());
-        return new GenericMessage("Product saved");
+        return new GenericMessage("Product is saved");
     }
-
-
-
 
 
 }
