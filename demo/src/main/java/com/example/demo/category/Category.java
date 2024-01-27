@@ -13,5 +13,5 @@ public class Category {
     @Id
     long id;
     String name;
-    String aktif;
+
 }
