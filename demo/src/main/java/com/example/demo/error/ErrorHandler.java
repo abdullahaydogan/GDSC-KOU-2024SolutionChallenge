@@ -1,23 +1,21 @@
 package com.example.demo.error;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.example.demo.user.validation.NotUniqueEmailException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.example.demo.user.validation.NotUniqueEmailException;
-
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class ErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ApiError> handleMethodArgNotValidException(MethodArgumentNotValidException exception,
-            HttpServletRequest request) {
+                                                              HttpServletRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(400);
         apiError.setPath(request.getRequestURI());
@@ -33,7 +31,7 @@ public class ErrorHandler {
 
     @ExceptionHandler(NotUniqueEmailException.class)
     ResponseEntity<ApiError> handleNotUniqEmailException(NotUniqueEmailException exception,
-            HttpServletRequest request) {
+                                                         HttpServletRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(400);
         apiError.setPath(request.getRequestURI());

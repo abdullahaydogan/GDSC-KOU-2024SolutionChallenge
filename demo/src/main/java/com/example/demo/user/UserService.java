@@ -1,14 +1,13 @@
 package com.example.demo.user;
 
-import java.util.UUID;
-
+import com.example.demo.user.validation.NotUniqueEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.user.validation.NotUniqueEmailException;
+import java.util.UUID;
 
 @Service
 public class UserService {
