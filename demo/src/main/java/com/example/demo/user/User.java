@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.user.validation.UniqueEmail;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,10 +23,13 @@ public class User {
 
     @NotBlank
     @Email
+    @UniqueEmail
     String email;
     @NotBlank
     @Size(min = 4)
     String password;
+
+    boolean active=false;
 
     String activationToken;
 

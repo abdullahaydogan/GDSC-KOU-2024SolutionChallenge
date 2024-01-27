@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 
 public @interface UniqueEmail {
 
-    String message() default "{hoaxify.constraint.email.notunique}";
+    String message() default "E-mail in use";
 
     Class<?>[] groups() default {};
 

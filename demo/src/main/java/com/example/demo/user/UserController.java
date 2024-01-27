@@ -1,6 +1,7 @@
 package com.example.demo.user;
 
 import com.example.demo.shared.GenericMessage;
+import com.example.demo.user.dto.UserCreate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/api/v1/users")
-    GenericMessage userCreate(@Valid @RequestBody User user) {
-        userService.userSave(user);
+    GenericMessage userCreate(@Valid @RequestBody UserCreate user) {
+        userService.userSave(user.toUser());
         return new GenericMessage("User is created");
     }
 
