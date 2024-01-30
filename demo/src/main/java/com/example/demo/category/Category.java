@@ -1,8 +1,6 @@
 package com.example.demo.category;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -10,8 +8,13 @@ import lombok.Data;
 @Table(name = "Category")
 public class Category {
 
-    @Id
-    long id;
-    String name;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int id;
+    String electronic;
+    String others;
+    String education;
+    String clothes;
+    String furniture;
 }

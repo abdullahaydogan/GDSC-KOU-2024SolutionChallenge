@@ -1,7 +1,9 @@
 package com.example.demo.error;
 
-import com.example.demo.user.validation.NotUniqueEmailException;
+import com.example.demo.user.exception.NotUniqueEmailException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,8 +16,7 @@ import java.util.Map;
 public class ErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    ResponseEntity<ApiError> handleMethodArgNotValidException(MethodArgumentNotValidException exception,
-                                                              HttpServletRequest request) {
+    ResponseEntity<ApiError> handleMethodArgNotValidException(MethodArgumentNotValidException exception, HttpServletRequest request) {
         ApiError apiError = new ApiError();
         apiError.setStatus(400);
         apiError.setPath(request.getRequestURI());
@@ -40,6 +41,26 @@ public class ErrorHandler {
         apiError.setValidationErrors(validationError);
         return ResponseEntity.badRequest().body(apiError);
 
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException exception, HttpServletRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setStatus(404);
+        apiError.setPath(request.getRequestURI());
+        apiError.setMessage("Not Found");
+        Map<String, String> validationError = new HashMap<>();
+        apiError.setValidationErrors(validationError);
+        return ResponseEntity.badRequest().body(apiError);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    ResponseEntity<ApiError> handleAuthenticatonException(AuthenticationException authenticationException, HttpServletRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setPath(request.getRequestURI());
+        apiError.setStatus(401);
+        apiError.setMessage(authenticationException.getMessage());
+        return ResponseEntity.status(401).body(apiError);
     }
 
 }

@@ -9,7 +9,12 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     void categorySave(Category category) {
-        categoryRepository.save(category);
+        try {
+            categoryRepository.save(category);
+        } catch (NullPointerException nullPointerException) {
+            throw new RuntimeException("Category cannot created");
+        }
+
     }
 
 
