@@ -13,4 +13,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> getProductByTag(String tag);
 
+    List<Product> getProductByCity(String city);
+
+    List<Product> getProductByCategoryAndCity(String category, String city);
+
 }

@@ -47,6 +47,14 @@ public class ProductController {
     public List<Product> getProductsByCategoryAndTag(@PathVariable String category, @PathVariable String tag) {
         return productService.getProductsByCategoryAndTag(category, tag);
     }
+    @GetMapping("/getProductByCity/{city}")
+    public List<Product>getProductByCity(@PathVariable String city){
+        return productService.getProductByCity(city);
+    }
+    @GetMapping("/getProductByCityAndCategory/category/{category}/city/{city}")
+    public List<Product>getProductByCityAndCategory(@PathVariable String category, @PathVariable String city){
+        return productService.getProductByCategoryAndCity(category,city);
+    }
 
 
     @PutMapping("/productUpdate/{id}")
