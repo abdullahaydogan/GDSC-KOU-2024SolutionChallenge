@@ -1,5 +1,6 @@
 package com.example.demo.error;
 
+import com.example.demo.user.exception.InvalidTokenException;
 import com.example.demo.user.exception.NotUniqueEmailException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,6 +62,15 @@ public class ErrorHandler {
         apiError.setStatus(401);
         apiError.setMessage(authenticationException.getMessage());
         return ResponseEntity.status(401).body(apiError);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    ResponseEntity<ApiError> handleInvalidTokenException(InvalidTokenException invalidTokenException, HttpServletRequest request) {
+        ApiError apiError = new ApiError();
+        apiError.setPath(request.getRequestURI());
+        apiError.setStatus(400);
+        apiError.setMessage(invalidTokenException.getMessage());
+        return ResponseEntity.status(400).body(apiError);
     }
 
 }

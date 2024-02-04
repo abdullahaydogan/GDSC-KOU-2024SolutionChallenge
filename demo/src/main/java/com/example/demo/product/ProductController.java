@@ -2,7 +2,7 @@ package com.example.demo.product;
 
 import com.example.demo.product.dto.ProductCreate;
 import com.example.demo.product.dto.ProductDTO;
-import com.example.demo.shared.GenericMessage;
+import com.example.demo.product.dto.ProductUpdate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping("/productSave")
-    GenericMessage productSave(@Valid @RequestBody ProductCreate product) {
+    public ResponseEntity<String> productSave(@Valid @RequestBody ProductCreate product) {
         productService.productSave(product.toProduct());
-        return new GenericMessage("product is created");
+        return ResponseEntity.ok("Product is created");
     }
 
     @GetMapping("/productList")
@@ -28,14 +28,30 @@ public class ProductController {
         return productService.listProduct();
     }
 
-    @GetMapping("/productListById/{id}")
+    @GetMapping("/getproductById/{id}")
     ProductDTO productListById(@PathVariable int id) {
         return new ProductDTO(productService.getProductById(id));
     }
 
-    @GetMapping("/category/{category}/tag/{tag}")
+    @GetMapping("/getProductByTag/{tag}")
+    public List<Product> getProductByTag(@PathVariable String tag) {
+        return productService.getProductByTag(tag);
+    }
+
+    @GetMapping("/getProductByCategory/{category}")
+    public List<Product> getProductByCategory(@PathVariable String category) {
+        return productService.getProductByCategory(category);
+    }
+
+    @GetMapping("/getProductByCategoryAndTag/category/{category}/tag/{tag}")
     public List<Product> getProductsByCategoryAndTag(@PathVariable String category, @PathVariable String tag) {
         return productService.getProductsByCategoryAndTag(category, tag);
+    }
+
+
+    @PutMapping("/productUpdate/{id}")
+    ProductDTO updateProduct(@PathVariable int id, @RequestBody ProductUpdate productUpdate) {
+        return new ProductDTO(productService.updateProduct(id, productUpdate));
     }
 
 }

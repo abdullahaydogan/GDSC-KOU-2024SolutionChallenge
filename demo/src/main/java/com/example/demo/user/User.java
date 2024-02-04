@@ -1,6 +1,5 @@
 package com.example.demo.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +15,8 @@ public class User {
     @GeneratedValue
     int id;
     @NotBlank
+    String username;
+    @NotBlank
     String name;
     @NotBlank
     String surname;
@@ -30,13 +31,14 @@ public class User {
     // @JsonIgnore //Does not send data to client
     @Size(min = 6)
     String password;
-    @JsonIgnore // Does not send data to client
+    // @JsonIgnore // Does not send data to client
     boolean active = false;
-    @JsonIgnore // Does not send data to client
+    // @JsonIgnore // Does not send data to client
     String activationToken;
     @NotBlank
     String longitude;
     @NotBlank
     String latitude;
+
 
 }

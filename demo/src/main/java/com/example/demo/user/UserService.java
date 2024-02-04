@@ -1,14 +1,18 @@
 package com.example.demo.user;
 
+import com.example.demo.configuration.CurrentUser;
 import com.example.demo.user.dto.UserUpdate;
+import com.example.demo.user.exception.InvalidTokenException;
 import com.example.demo.user.exception.NotUniqueEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.MailException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +20,8 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackFor = MailException.class)
     void userSave(User user) {
@@ -27,8 +33,12 @@ public class UserService {
         }
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public Page<User> getUsers(Pageable pageable, CurrentUser currentUser) {
+        if (currentUser == null) {
+            return userRepository.findAll(pageable);
+        } else {
+            return userRepository.findByIdNot(currentUser.getId(), pageable);
+        }
     }
 
     public User getUserById(int id) {
@@ -42,6 +52,7 @@ public class UserService {
 
     public User updateUser(int id, UserUpdate userUpdate) {
         User inDB = getUserById(id);
+        inDB.setUsername(userUpdate.username());
         inDB.setPassword(userUpdate.password());
         inDB.setEmail(userUpdate.email());
         inDB.setCity(userUpdate.city());
@@ -49,5 +60,15 @@ public class UserService {
         inDB.setLongitude(userUpdate.longitude());
         inDB.setLatitude(userUpdate.latitude());
         return userRepository.save(inDB);
+    }
+
+    public void activateUser(String token) {
+        User inDB = userRepository.findByActivationToken(token);
+        if (inDB == null) {
+            throw new InvalidTokenException();
+        }
+        inDB.setActive(true);
+        inDB.setActivationToken(null);
+        userRepository.save(inDB);
     }
 }

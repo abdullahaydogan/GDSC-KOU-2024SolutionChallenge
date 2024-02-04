@@ -8,6 +8,7 @@ import lombok.Data;
 public class UserDTO {
 
     int id;
+    String username;
 
     String name;
 
@@ -22,9 +23,12 @@ public class UserDTO {
     String latitude;
 
     String longitude;
+    String activationToken;
+    String password;
 
     public UserDTO(User user) {
         setId(user.getId());
+        setUsername(user.getUsername());
         setName(user.getName());
         setSurname(user.getSurname());
         setPhoneNumber(user.getPhoneNumber());
@@ -32,6 +36,8 @@ public class UserDTO {
         setCity(user.getCity());
         setLatitude(user.getLatitude());
         setLongitude(user.getLongitude());
+        setPassword(user.getPassword());
+        setActivationToken(user.getActivationToken());
     }
 
 }

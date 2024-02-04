@@ -4,6 +4,7 @@ import com.example.demo.auth.dto.Credentials;
 import com.example.demo.user.User;
 import com.example.demo.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
@@ -12,7 +13,8 @@ import java.util.Base64;
 public class BasicAuthTokenService implements TokenService {
     @Autowired
     UserService userService;
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Override
     public Token createToken(User user, Credentials credentials) {
         String emailColonPassword = credentials.email() + ":" + credentials.password();
@@ -30,7 +32,7 @@ public class BasicAuthTokenService implements TokenService {
         var userPassword = credentials[1];
         User inDB = userService.findByEmail(email);
         if (inDB == null) return null;
-        if (inDB.getPassword() != userPassword) return null;
+        if (!passwordEncoder.matches(userPassword,inDB.getPassword())) return null;
         return inDB;
     }
 }

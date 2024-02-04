@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserCreate(
+        @NotBlank String username,
         @NotBlank String name,
         @NotBlank String surname,
         @NotBlank String phoneNumber,
@@ -21,6 +22,7 @@ public record UserCreate(
 
     public User toUser() {
         User user = new User();
+        user.setUsername(username);
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);

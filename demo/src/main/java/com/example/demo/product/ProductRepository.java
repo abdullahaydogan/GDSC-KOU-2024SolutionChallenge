@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findById(int id);
+
     List<Product> findByCategoryAndTag(String category, String tag);
 
+    List<Product> findByCategory(String category);
+
+    List<Product> getProductByTag(String tag);
 
 }

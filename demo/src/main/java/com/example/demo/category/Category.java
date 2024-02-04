@@ -10,11 +10,12 @@ public class Category {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String electronic;
     String others;
     String education;
     String clothes;
     String furniture;
+
 }

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 
 public record UserUpdate(
+        String username,
         String phoneNumber,
         @Email
         @UniqueEmail
@@ -17,6 +18,8 @@ public record UserUpdate(
         String city,
         String longitude,
         String latitude
+
+
 ) {
 
 }

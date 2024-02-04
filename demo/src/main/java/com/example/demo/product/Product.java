@@ -1,13 +1,13 @@
 package com.example.demo.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Data
 @Entity
 @Table(name = "product")
 public class Product {
@@ -26,7 +26,8 @@ public class Product {
 
     @NotBlank
     String latitude;
-    boolean active=false;
+    @JsonIgnore
+    boolean active = false;
 
     @NotBlank
     String longitude;
@@ -35,7 +36,7 @@ public class Product {
     String description;
 
     @NotBlank
-    String addres;
+    String address;
 
     public void setId(int id) {
         this.id = id;
@@ -57,6 +58,10 @@ public class Product {
         this.latitude = latitude;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
@@ -65,7 +70,7 @@ public class Product {
         this.description = description;
     }
 
-    public void setAddres(String addres) {
-        this.addres = addres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

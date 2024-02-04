@@ -14,7 +14,6 @@ public class CategoryService {
         } catch (NullPointerException nullPointerException) {
             throw new RuntimeException("Category cannot created");
         }
-
     }
 
 

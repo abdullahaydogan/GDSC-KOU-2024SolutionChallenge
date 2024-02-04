@@ -9,6 +9,7 @@ import com.example.demo.user.User;
 import com.example.demo.user.UserService;
 import com.example.demo.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -19,12 +20,14 @@ public class AuthService {
     TokenService tokenService;
     @Autowired
     UserService userService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public AuthResponse authenticate(Credentials credentials) {
         User inDB = userService.findByEmail(credentials.email());
         if (inDB == null) throw new AuthenticationException();
-        if (!Objects.equals(credentials.password(), inDB.getPassword()))
-            throw new com.example.demo.auth.exception.AuthenticationException();
+        if (!passwordEncoder.matches(credentials.password(), inDB.getPassword()))
+            throw new AuthenticationException();
         Token token = tokenService.createToken(inDB, credentials);
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(token);
