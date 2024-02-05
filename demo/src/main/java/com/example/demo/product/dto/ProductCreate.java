@@ -13,9 +13,9 @@ public record ProductCreate(
         @NotBlank
         String city,
         @NotBlank
-        String latitude,
-        @NotBlank
         String address,
+        @NotBlank
+        String latitude,
         @NotBlank
         String longitude,
 
@@ -27,10 +27,10 @@ public record ProductCreate(
     public Product toProduct() {
         Product product = new Product();
         product.setTag(tag);
+        product.setAddress(address);
         product.setLatitude(latitude);
         product.setLongitude(longitude);
         product.setDescription(description);
-        product.setAddress(address);
         product.setCity(city);
         return product;
 

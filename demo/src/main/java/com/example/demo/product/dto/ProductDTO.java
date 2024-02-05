@@ -3,7 +3,7 @@ package com.example.demo.product.dto;
 import com.example.demo.product.Product;
 import lombok.Getter;
 
-@Getter
+
 public class ProductDTO {
 
     int id;
@@ -21,15 +21,54 @@ public class ProductDTO {
     String description;
     String address;
 
+
+
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public ProductDTO(Product product) {
         setId(product.getId());
         setTag(product.getTag());
         setCity(product.getCity());
+        setAddress(product.getAddress());
         setDescription(product.getDescription());
         setLatitude(product.getLatitude());
         setLongitude(product.getLongitude());
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -43,9 +82,6 @@ public class ProductDTO {
         this.category = category;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public void setCity(String city) {
         this.city = city;

@@ -14,10 +14,10 @@ public class CurrentUser implements UserDetails {
     String username;
     String password;
 
-    public CurrentUser(User user){
-        this.id=user.getId();
-        this.username=user.getUsername();
-        this.password=user.getPassword();
+    public CurrentUser(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
     }
 
     public void setId(int id) {

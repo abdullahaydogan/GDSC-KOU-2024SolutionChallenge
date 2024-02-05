@@ -42,6 +42,7 @@ public class ProductService {
     public List<Product> getProductsByCategoryAndTag(String category, String tag) {
         return productRepository.findByCategoryAndTag(category, tag);
     }
+
     public List<Product> getProductByTag(String tag) {
         return productRepository.getProductByTag(tag);
     }
@@ -50,11 +51,10 @@ public class ProductService {
         String normalizedCity = city.toLowerCase();
         return productRepository.getProductByCity(normalizedCity);
     }
-
-    public List<Product> getProductByCategoryAndCity(String category, String city) {
+    public List<Product> getProductsByCategoryAndCity(String category, String city) {
+        String normalizedCategory =category.toLowerCase();
         String normalizedCity = city.toLowerCase();
-        String normalizedCategory=category.toLowerCase();
-        return productRepository.getProductByCategoryAndCity(normalizedCategory,normalizedCity);
+        return productRepository.findByCategoryAndCity(category, city);
     }
 
 

@@ -17,6 +17,7 @@ public record ProductUpdate(
         String description,
         @NotBlank
         String address
+
 ) {
 
 }

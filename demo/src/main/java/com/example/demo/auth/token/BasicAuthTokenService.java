@@ -15,6 +15,7 @@ public class BasicAuthTokenService implements TokenService {
     UserService userService;
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Override
     public Token createToken(User user, Credentials credentials) {
         String emailColonPassword = credentials.email() + ":" + credentials.password();
@@ -32,7 +33,7 @@ public class BasicAuthTokenService implements TokenService {
         var userPassword = credentials[1];
         User inDB = userService.findByEmail(email);
         if (inDB == null) return null;
-        if (!passwordEncoder.matches(userPassword,inDB.getPassword())) return null;
+        if (!passwordEncoder.matches(userPassword, inDB.getPassword())) return null;
         return inDB;
     }
 }

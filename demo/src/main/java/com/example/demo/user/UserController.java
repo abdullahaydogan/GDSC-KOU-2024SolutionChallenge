@@ -52,8 +52,8 @@ public class UserController {
 
     //User Update
     @PutMapping("/userUpdate/{id}")
-    UserDTO updateUser(@PathVariable int id, @Valid @RequestBody UserUpdate userUpdate,@AuthenticationPrincipal CurrentUser currentUser ) {
-        if (currentUser.getId() != id ){
+    UserDTO updateUser(@PathVariable int id, @Valid @RequestBody UserUpdate userUpdate, @AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser.getId() != id) {
             throw new AuthorizationException();
         }
         return new UserDTO(userService.updateUser(id, userUpdate));
