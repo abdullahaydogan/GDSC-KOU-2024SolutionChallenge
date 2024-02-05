@@ -42,6 +42,7 @@ public class ProductController {
     public List<Product> getProductByCategory(@PathVariable String category) {
         return productService.getProductByCategory(category);
     }
+
     @GetMapping("/getProductByCity/{city}")
     public List<Product> getProductByCity(@PathVariable String city) {
         return productService.getProductByCity(city);

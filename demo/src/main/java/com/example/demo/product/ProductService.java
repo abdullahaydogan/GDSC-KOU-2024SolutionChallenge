@@ -36,25 +36,30 @@ public class ProductService {
     }
 
     public List<Product> getProductByCategory(String category) {
-        return productRepository.findByCategory(category);
+        String normalizedCategory = category.toLowerCase();
+        return productRepository.findByCategory(normalizedCategory);
     }
 
     public List<Product> getProductsByCategoryAndTag(String category, String tag) {
-        return productRepository.findByCategoryAndTag(category, tag);
+        String normalizedCategory = category.toLowerCase();
+        String normalizedTag = tag.toLowerCase();
+        return productRepository.findByCategoryAndTag(normalizedCategory, normalizedTag);
     }
 
     public List<Product> getProductByTag(String tag) {
-        return productRepository.getProductByTag(tag);
+        String normalizedTag = tag.toLowerCase();
+        return productRepository.getProductByTag(normalizedTag);
     }
 
     public List<Product> getProductByCity(String city) {
         String normalizedCity = city.toLowerCase();
         return productRepository.getProductByCity(normalizedCity);
     }
+
     public List<Product> getProductsByCategoryAndCity(String category, String city) {
-        String normalizedCategory =category.toLowerCase();
+        String normalizedCategory = category.toLowerCase();
         String normalizedCity = city.toLowerCase();
-        return productRepository.findByCategoryAndCity(category, city);
+        return productRepository.findByCategoryAndCity(normalizedCategory, normalizedCity);
     }
 
 
@@ -69,7 +74,6 @@ public class ProductService {
         inDB.setLatitude(productUpdate.latitude());
         return productRepository.save(inDB);
     }
-
 
 
 }
