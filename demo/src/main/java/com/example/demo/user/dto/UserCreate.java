@@ -15,8 +15,8 @@ public record UserCreate(
 
         @NotBlank String city,
 
-        String longitude,
-        String latitude
+        @NotBlank String longitude,
+        @NotBlank String latitude
 
 ) {
 

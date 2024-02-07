@@ -55,6 +55,11 @@ public class ProductService {
         String normalizedCity = city.toLowerCase();
         return productRepository.getProductByCity(normalizedCity);
     }
+    public List<Product> getProductByTagAndCity(String tag, String city) {
+        String normalizedTag= tag.toLowerCase();
+        String normalizedCity=city.toLowerCase();
+        return productRepository.getProductByTagAndCity(normalizedTag,normalizedCity );
+    }
 
     public List<Product> getProductsByCategoryAndCity(String category, String city) {
         String normalizedCategory = category.toLowerCase();
@@ -74,6 +79,8 @@ public class ProductService {
         inDB.setLatitude(productUpdate.latitude());
         return productRepository.save(inDB);
     }
+
+
 
 
 }
